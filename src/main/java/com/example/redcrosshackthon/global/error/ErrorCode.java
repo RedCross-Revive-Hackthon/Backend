@@ -12,9 +12,10 @@ public enum ErrorCode {
     INPUT_INVALID_ERROR(400, "G002", "잘못된 입력"),
 
     //User
-    USER_NOT_FOUND(404,"U001","유저를 찾을 수 없습니다.");
+    USER_NOT_FOUND(404,"U001","유저를 찾을 수 없습니다."),
 
-
+    //University
+    UNIVERSITY_NOT_FOUND(404,"UN001","대학을 찾을 수 없습니다.");
 
 
     private final int status;

@@ -1,6 +1,7 @@
 package com.example.redcrosshackthon.domain.user.service;
 
 import com.example.redcrosshackthon.domain.score.repository.ScoreRepository;
+import com.example.redcrosshackthon.domain.score.service.ScoreService;
 import com.example.redcrosshackthon.domain.university.entity.University;
 import com.example.redcrosshackthon.domain.user.dto.request.UserRegisterReqDto;
 import com.example.redcrosshackthon.domain.user.dto.response.UserInfoResDto;
@@ -20,11 +21,16 @@ import java.util.Optional;
 public class UserService {
     private final UserRepository userRepository;
     private final UserMapper userMapper;
-    private final ScoreRepository scoreRepository;
+    private final ScoreService scoreService;
     @Transactional
     public UserInfoResDto getUser(Long userId){
-        User user = userRepository.findById(userId).orElseThrow(() -> new ErrorResponse(ErrorCode.USER_NOT_FOUND));
+        User user = findUser(userId);
+        int sumPoints = scoreService.sumPointUser(userId);
         University university = user.getUniversity();
-        return userMapper.entityToUserInfo(user,university);
+        return userMapper.entityToUserInfo(user,university,sumPoints);
+    }
+
+    private User findUser(Long userId){
+        return userRepository.findById(userId).orElseThrow(() -> new ErrorResponse(ErrorCode.USER_NOT_FOUND));
     }
 }
