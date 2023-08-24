@@ -1,5 +1,6 @@
 package com.example.redcrosshackthon.domain.user.entity;
 
+import com.example.redcrosshackthon.domain.score.entity.Score;
 import com.example.redcrosshackthon.domain.university.entity.University;
 import lombok.Builder;
 import lombok.Getter;
@@ -31,7 +32,10 @@ public class User {
     private String image;
 
     @ManyToOne
-    @JoinColumn(name = "id")
+    @JoinColumn(name = "university_id")
     private University university;
+
+    @OneToMany(mappedBy = "user")
+    private List<Score> scores;
 
 }
