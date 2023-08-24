@@ -6,10 +6,10 @@ import lombok.Getter;
 @Getter
 @Builder
 public class UserInfoResDto {
-    private Long university_id;
-    private String user_id;
+    private String univName;
     private String name;
-    private String email;
     private String department;
+    private int score;
+    private int rank;
 }
 
