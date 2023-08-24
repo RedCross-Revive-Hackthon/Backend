@@ -15,12 +15,14 @@ import com.example.redcrosshackthon.domain.user.repository.UserRepository;
 import com.example.redcrosshackthon.global.error.ErrorCode;
 import com.example.redcrosshackthon.global.error.ErrorResponse;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 @Service
 @RequiredArgsConstructor
@@ -47,7 +49,7 @@ public class ScoreService {
 
     @Transactional
     public ScoresUserInfoResDto getScore(Long userId){
-        User user = userRepository.findById(userId).orElseThrow(()->new ErrorResponse(ErrorCode.USER_NOT_FOUND));
+        User user = userRepository.findById(userId).orElseThrow(() -> new ErrorResponse(ErrorCode.USER_NOT_FOUND));
         List<Score> scores = scoreRepository.findByUser_Id(user.getId());
         List<ScoreInfoResDto> scoreList = scores.stream()
                 .map(scoreMapper::entityToScoreInfo) // Score를 ScoreInfo로 매핑
@@ -56,23 +58,26 @@ public class ScoreService {
     }
 
     @Transactional
-    public List<RankInfoResDto> getRankTop3(Long univId){
+    public RankInfoResDto getRank(Long univId){
         University university = universityRepository.findById(univId).orElseThrow(()->new ErrorResponse(ErrorCode.UNIVERSITY_NOT_FOUND));
-        List<RankUserResDto> rankUserResDto = userRepository.getUserScores();
-        List<RankInfoResDto> rankList = rankUserResDto.stream()
-                .map(userDto -> {
-                    return scoreMapper.entityToRankInfoDto(university, (List<RankUserResDto>) userDto);
+        List<User> users = userRepository.getUsersByTotalPoint();
+        List<RankUserResDto> rank = IntStream.range(0, users.size())
+                .mapToObj(index -> {
+                    User user = users.get(index);
+                    int rankValue = sumPointUser(user.getId());
+                    int number = index + 1;
+                    return scoreMapper.entityToRankUserDto(user, rankValue, number);
                 })
                 .collect(Collectors.toList());
+        RankInfoResDto rankList = scoreMapper.entityToRankInfoDto(university,rank);
         return rankList;
     }
 
+
     public int sumPointUser(Long userId){
         Integer sumPoints = scoreRepository.sumPointsByUserId(userId);
+        if(sumPoints ==null) return 0;
         return sumPoints;
     }
 
-    private RankUserResDto rankUserResDto(User user, int sumPoints,int rank){
-        return scoreMapper.entityToRankUserDto(user,sumPoints,rank);
-    }
 }
