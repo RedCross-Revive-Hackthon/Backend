@@ -31,6 +31,7 @@ public class ScoreMapper {
 
     public RankUserResDto entityToRankUserDto(User user,int sumPoints,int rank){
         return RankUserResDto.builder()
+                .userId(user.getId())
                 .name(user.getName())
                 .department(user.getDepartment())
                 .image(user.getImage())

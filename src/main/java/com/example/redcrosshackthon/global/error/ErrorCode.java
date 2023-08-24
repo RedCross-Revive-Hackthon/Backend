@@ -18,6 +18,7 @@ public enum ErrorCode {
     UNIVERSITY_NOT_FOUND(404,"UN001","대학을 찾을 수 없습니다.");
 
 
+
     private final int status;
     private final String code;
     private final String message;

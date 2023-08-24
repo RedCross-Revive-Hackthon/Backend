@@ -4,6 +4,7 @@ import com.example.redcrosshackthon.domain.user.entity.User;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
+import org.hibernate.annotations.ColumnDefault;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
@@ -20,6 +21,7 @@ public class Score {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @ColumnDefault("0")
     private int point;
 
     private String type;
@@ -32,9 +34,9 @@ public class Score {
     private User user;
 
     @Builder
-    public Score(int point, String type, LocalDate created_at, User user) {
+    public Score(User user,int point, String type) {
+        this.user = user;
         this.point = point;
         this.type = type;
-        this.user = user;
     }
 }

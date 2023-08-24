@@ -32,9 +32,9 @@ public class ScoreController {
         return ResponseEntity.status(HttpStatus.OK).body(score);
     }
 
-    @GetMapping("/rank/3/{university_id}")
-    public ResponseEntity<List<RankInfoResDto>> getRank(@PathVariable("university_id") Long univId){
-        List<RankInfoResDto> rankTop3 = scoreService.getRankTop3(univId);
+    @GetMapping("/rank/{university_id}")
+    public ResponseEntity<RankInfoResDto> getRank(@PathVariable("university_id") Long univId){
+        RankInfoResDto rankTop3 = scoreService.getRank(univId);
         return ResponseEntity.status(HttpStatus.OK).body(rankTop3);
     }
 }

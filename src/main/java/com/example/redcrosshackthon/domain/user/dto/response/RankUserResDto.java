@@ -6,6 +6,7 @@ import lombok.Getter;
 @Getter
 @Builder
 public class RankUserResDto {
+    private Long userId;
     private String name;
     private String department;
     private String image;
