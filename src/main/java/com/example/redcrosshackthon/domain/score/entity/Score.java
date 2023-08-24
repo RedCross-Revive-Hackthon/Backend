@@ -18,7 +18,7 @@ import java.time.LocalDate;
 public class Score {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long score_id;
+    private Long id;
 
     private int point;
 
@@ -28,7 +28,7 @@ public class Score {
     private LocalDate created_at;
 
     @ManyToOne
-    @JoinColumn(name = "id")
+    @JoinColumn(name = "user_id")
     private User user;
 
     @Builder

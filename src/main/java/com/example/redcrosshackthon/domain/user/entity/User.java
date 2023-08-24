@@ -1,5 +1,7 @@
 package com.example.redcrosshackthon.domain.user.entity;
 
+import com.example.redcrosshackthon.domain.score.entity.Score;
+import com.example.redcrosshackthon.domain.university.entity.University;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
@@ -29,12 +31,11 @@ public class User {
 
     private String image;
 
-    @Builder
-    public User(String user_id, String pwd, String name, String email, String department) {
-        this.user_id = user_id;
-        this.pwd = pwd;
-        this.name = name;
-        this.email = email;
-        this.department = department;
-    }
+    @ManyToOne
+    @JoinColumn(name = "university_id")
+    private University university;
+
+    @OneToMany(mappedBy = "user")
+    private List<Score> scores;
+
 }

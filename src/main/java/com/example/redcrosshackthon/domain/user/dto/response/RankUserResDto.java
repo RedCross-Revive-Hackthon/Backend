@@ -5,11 +5,10 @@ import lombok.Getter;
 
 @Getter
 @Builder
-public class UserInfoResDto {
-    private String univName;
+public class RankUserResDto {
     private String name;
     private String department;
+    private String image;
     private int score;
     private int rank;
 }
-
