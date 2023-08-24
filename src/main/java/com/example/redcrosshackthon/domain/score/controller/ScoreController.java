@@ -1,6 +1,8 @@
 package com.example.redcrosshackthon.domain.score.controller;
 
 import com.example.redcrosshackthon.domain.score.dto.request.ScoreRegisterReqDto;
+import com.example.redcrosshackthon.domain.score.dto.response.ScoreInfoResDto;
+import com.example.redcrosshackthon.domain.score.dto.response.ScoresUserInfoResDto;
 import com.example.redcrosshackthon.domain.score.service.ScoreService;
 import com.example.redcrosshackthon.global.response.ResultCode;
 import com.example.redcrosshackthon.global.response.ResultResponse;
@@ -22,5 +24,8 @@ public class ScoreController {
     }
 
     @GetMapping("/{user_id}")
-    public
+    public ResponseEntity<ScoresUserInfoResDto> getScore(@PathVariable("user_id") Long userId){
+        ScoresUserInfoResDto score = scoreService.getScore(userId);
+        return ResponseEntity.status(HttpStatus.OK).body(score);
+    }
 }

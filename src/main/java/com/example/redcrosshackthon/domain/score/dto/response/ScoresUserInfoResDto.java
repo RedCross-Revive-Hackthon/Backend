@@ -4,9 +4,11 @@ import com.example.redcrosshackthon.domain.user.entity.User;
 import lombok.Builder;
 import lombok.Getter;
 
+import java.util.List;
+
 @Getter
 @Builder
-public class ScoreInfoResDto {
-    private int point;
-    private String type;
+public class ScoresUserInfoResDto {
+    private User user;
+    private List<ScoreInfoResDto> scores;
 }
