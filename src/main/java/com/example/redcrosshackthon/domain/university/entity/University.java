@@ -12,6 +12,7 @@ import javax.persistence.*;
 public class University {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "university_id")
     private Long id;
 
     private String univName;

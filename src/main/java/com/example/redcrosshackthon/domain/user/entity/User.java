@@ -1,5 +1,6 @@
 package com.example.redcrosshackthon.domain.user.entity;
 
+import com.example.redcrosshackthon.domain.bloodCertificate.entity.BloodCertificate;
 import com.example.redcrosshackthon.domain.score.entity.Score;
 import com.example.redcrosshackthon.domain.university.entity.University;
 import lombok.Builder;
@@ -17,9 +18,10 @@ import java.util.List;
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "user_id")
     private Long id;
 
-    private String user_id;
+    private String identity;
 
     private String pwd;
 
@@ -37,5 +39,8 @@ public class User {
 
     @OneToMany(mappedBy = "user")
     private List<Score> scores;
+
+    @OneToMany(mappedBy = "user")
+    private List<BloodCertificate> bloodCertificates;
 
 }
