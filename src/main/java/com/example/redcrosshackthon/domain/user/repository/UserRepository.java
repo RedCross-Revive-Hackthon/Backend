@@ -15,4 +15,8 @@ public interface UserRepository extends JpaRepository<User, Long> {
     List<User> getTop3UsersByTotalPoint();
     @Query("SELECT u from User u join u.scores s group by u.id ORDER BY SUM(s.point) DESC")
     List<User> getUsersByTotalPoint();
+
+    List<User> findByUniversityIdOrderByPointDesc(Long universityId);
+
+    List<User> findTop3ByUniversityIdOrderByPointDesc(Long universityId);
 }

@@ -9,12 +9,12 @@ import org.springframework.stereotype.Component;
 @Component
 public class UserMapper {
 
-    public UserInfoResDto entityToUserInfo(User user, University university,int sumPoints) {
+    public UserInfoResDto entityToUserInfo(User user) {
         return UserInfoResDto.builder()
-                .univName(university.getUnivName())
+                .univName(user.getUniversity().getUnivName())
                 .name(user.getName())
                 .department(user.getDepartment())
-                .score(sumPoints)
+                .score(user.getPoint())
                 .rank(1)
                 .build();
     }

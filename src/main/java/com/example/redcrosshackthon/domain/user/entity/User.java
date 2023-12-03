@@ -8,7 +8,6 @@ import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 
 import javax.persistence.*;
-import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -31,6 +30,9 @@ public class User {
 
     private String department;
 
+    @Column(columnDefinition = "int default 0")
+    private int point;
+
     private String image;
 
     @ManyToOne
@@ -43,4 +45,17 @@ public class User {
     @OneToMany(mappedBy = "user")
     private List<BloodCertificate> bloodCertificates;
 
+    public User(String identity, String pwd, String name, String email, String department) {
+        this.identity = identity;
+        this.pwd = pwd;
+        this.name = name;
+        this.email = email;
+        this.department = department;
+    }
+    public void setUniversity(University university){
+        this.university = university;
+    }
+    public void setPoint(int count){
+        this.point += count;
+    }
 }
