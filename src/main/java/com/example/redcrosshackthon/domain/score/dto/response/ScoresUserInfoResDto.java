@@ -9,6 +9,6 @@ import java.util.List;
 @Getter
 @Builder
 public class ScoresUserInfoResDto {
-    private User user;
+    private Long userId;
     private List<ScoreInfoResDto> scores;
 }

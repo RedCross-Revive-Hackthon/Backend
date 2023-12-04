@@ -22,7 +22,6 @@ public class Score {
     @Column(name = "socre_id")
     private Long id;
 
-    @ColumnDefault("0")
     private int point;
 
     private String type;
