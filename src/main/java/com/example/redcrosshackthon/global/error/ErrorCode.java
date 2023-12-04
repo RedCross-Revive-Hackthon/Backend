@@ -15,7 +15,9 @@ public enum ErrorCode {
     USER_NOT_FOUND(404,"U001","유저를 찾을 수 없습니다."),
 
     //University
-    UNIVERSITY_NOT_FOUND(404,"UN001","대학을 찾을 수 없습니다.");
+    UNIVERSITY_NOT_FOUND(404,"UN001","대학을 찾을 수 없습니다."),
+    //Blood
+    BLOOD_CERTIFICATE_NOT_FOUND(404,"B001","헌혈증서가 없습니다.");
 
 
 
