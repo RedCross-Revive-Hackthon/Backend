@@ -19,9 +19,9 @@ import java.time.LocalDate;
 public class Score {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "socre_id")
     private Long id;
 
-    @ColumnDefault("0")
     private int point;
 
     private String type;

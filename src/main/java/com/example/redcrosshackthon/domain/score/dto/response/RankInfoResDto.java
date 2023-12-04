@@ -11,5 +11,4 @@ import java.util.List;
 public class RankInfoResDto {
     private String UnivName;
     private List<RankUserResDto> userList;
-
 }

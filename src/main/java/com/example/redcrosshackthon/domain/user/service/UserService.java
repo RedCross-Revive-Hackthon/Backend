@@ -18,16 +18,18 @@ import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
+@Transactional(readOnly = true)
 public class UserService {
     private final UserRepository userRepository;
     private final UserMapper userMapper;
-    private final ScoreService scoreService;
     @Transactional
+    public Long createUser(User user){
+        User getUser = userRepository.save(user);
+        return getUser.getId();
+    }
     public UserInfoResDto getUser(Long userId){
         User user = findUser(userId);
-        int sumPoints = scoreService.sumPointUser(userId);
-        University university = user.getUniversity();
-        return userMapper.entityToUserInfo(user,university,sumPoints);
+        return userMapper.entityToUserInfo(user);
     }
 
     private User findUser(Long userId){

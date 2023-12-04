@@ -14,6 +14,7 @@ import javax.persistence.*;
 public class BloodCertificate {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "bloodCertificate_id")
     private Long id;
 
     private String bloodInfo;
@@ -23,8 +24,8 @@ public class BloodCertificate {
     private User user;
 
     @Builder
-    public BloodCertificate(String bloodInfo,User user) {
-        this.bloodInfo = bloodInfo;
+    public BloodCertificate(User user, String bloodInfo) {
         this.user = user;
+        this.bloodInfo = bloodInfo;
     }
 }

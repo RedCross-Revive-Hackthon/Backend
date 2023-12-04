@@ -22,16 +22,15 @@ public class ScoreMapper {
                 .build();
     }
 
-    public ScoresUserInfoResDto entityToScoresInfoDto(List<ScoreInfoResDto> scores, User user) {
+    public ScoresUserInfoResDto entityToScoresInfoDto(Long userId,List<ScoreInfoResDto> scores) {
         return ScoresUserInfoResDto.builder()
-                .user(user)
+                .userId(userId)
                 .scores(scores)
                 .build();
     }
 
     public RankUserResDto entityToRankUserDto(User user,int sumPoints,int rank){
         return RankUserResDto.builder()
-                .userId(user.getId())
                 .name(user.getName())
                 .department(user.getDepartment())
                 .image(user.getImage())
@@ -40,10 +39,10 @@ public class ScoreMapper {
                 .build();
     }
 
-    public RankInfoResDto entityToRankInfoDto (University university,List<RankUserResDto> users){
+    public RankInfoResDto entityToRankInfoDto (String univName,List<RankUserResDto> rank){
         return RankInfoResDto.builder()
-                .UnivName(university.getUnivName())
-                .userList(users)
+                .UnivName(univName)
+                .userList(rank)
                 .build();
     }
 
