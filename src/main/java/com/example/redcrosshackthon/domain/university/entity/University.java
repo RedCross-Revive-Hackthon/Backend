@@ -16,4 +16,8 @@ public class University {
     private Long id;
 
     private String univName;
+
+    public University(String univName) {
+        this.univName = univName;
+    }
 }
